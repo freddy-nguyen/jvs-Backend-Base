@@ -9,7 +9,6 @@ import express from "express"
 
 //go here:https://expressjs.com/en/starter/static-files.html
 //then configure
-//
 const configViewEngine = (app) => { //arrow function instead of normal function because react also uses arrow function (also many benefits!) 
     //app is our app express
     app.use(express.static('./src/public')); // /public -> ./src/public
@@ -21,3 +20,6 @@ const configViewEngine = (app) => { //arrow function instead of normal function 
 
 export default configViewEngine; //default to export only 1 function var
 //dont export function()
+//meaning, line 10 configViewEngine(app); in server.js = every line inside configViewEngine;
+
+//VIEW ENGINE IS basically EJS
