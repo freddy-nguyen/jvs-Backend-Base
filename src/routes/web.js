@@ -24,8 +24,11 @@ const initWebRoutes = (app) => {
     router.get("/", homeController.handleHelloWorld); //this guy is bc I put controllers named handle in controller.js inside controller folder. homeController.handleHelloWorld is a thing bc I used modules.export = {}
     // router.get("/about", handleAbout);
     router.get("/about", homeController.handleAbout);
-    router.get("/user", homeController.handleUser);
-    router.post("/users/create-user", homeController.handleCreateNewUser)//thanks to using form method="POST", action="/users/create-user", post could take user input and post to our db
+    router.get("/user", homeController.handleUserPage);
+    router.post("/users/create-user", homeController.handleCreateNewUser);//thanks to using form method="POST", action="/users/create-user", post could take user input and post to our db
+    router.post("/users/delete-user/:id", homeController.handleDeleteUser);// : tells express that id is a variable
+    router.get("/users/update-user/:id", homeController.getUpdateUserPage);
+    router.post("/users/update-user/:id", homeController.handleUpdateUser);
     return app.use("/", router);
 }
 

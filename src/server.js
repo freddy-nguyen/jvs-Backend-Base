@@ -1,5 +1,5 @@
 import express from "express";
-import configViewEngine from "./configs/viewEngine";
+import configViewEngine from "./config/viewEngine";
 import initWebRoutes from "./routes/web";
 // to be able to run process.env in nodejs (if not , it would just use 8080 for PORT)
 require("dotenv").config();
