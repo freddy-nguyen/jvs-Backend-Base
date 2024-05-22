@@ -13,15 +13,16 @@ const handleAbout = (req, res) => {
 const handleUserPage = async (req, res) => {
     //MODEL => GET DATA FROM DATABASE
     let userList = await userService.getUserList();
+    console.log(">>>check handleUserPage: ", userList);
     // {} because want it to be object. OBJECT IS NEEDED WHEN DATA FROM CONTROLLER TO VIEW
     return res.render("user.ejs", { userList }); //yield in RoR, so we could use HTML and JavaScript in .ejs
 }
 
-const handleCreateNewUser = (req, res) => {
+const handleCreateNewUser = async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     let username = req.body.username;
-    userService.createNewUser(email, password, username);
+    await userService.createNewUser(email, password, username);
     return res.redirect("/user")
 }
 
@@ -36,9 +37,14 @@ const getUpdateUserPage = async (req, res) => {
     let id = req.params.id;
     let user = await userService.getUserByID(id);
     let userData = {};
-    if (user && user.length > 0) {
-        userData = user[0]; //user[0] can only be accessed if user is not empty => user length check must
-    }
+    // console.log(user);
+    // console.log(user == true);
+    // console.log(user.length > 0 == true);
+    // if (user && user.length > 0) {
+    userData = user; //user[0] can only be accessed if user is not empty => user length check must
+    // }
+    // console.log(userData);
+    // console.log(userData.id);
     return res.render("user-update.ejs", { userData });
 }
 
@@ -47,7 +53,7 @@ const handleUpdateUser = async (req, res) => {
     // console.log(id == req.body.id); the input hidden trick to send anything to refer by req.body
     let username = req.body.username; //not req .param, param is only when it's on the url
     let email = req.body.email; // not req. param, param is only when it's on the url
-    let update = await userService.updateUser(username, email, id);
+    await userService.updateUser(username, email, id);
     return res.redirect("/user");
 }
 
